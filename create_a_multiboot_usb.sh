@@ -15,11 +15,12 @@ fi
 
 sfdisk --delete /dev/$usb
 echo 'type=EFI' | sfdisk /dev/$usb
-mkfs.vfat -F 32 -I /dev/$usb
-mount /dev/${usb}1 /mnt
-mkdir /mnt/{boot,boot-isos,other-isos}
+mkfs.vfat -F 32 /dev/$usb
+mount /dev/${usb}1 /mnt/usb
+mkdir /mnt/usb/{boot,boot-isos,other-isos}
 
-grub-install --target=x86_64-efi --removable --boot-directory=/mnt/boot --efi-directory=/mnt
-curl -o $url /mnt/boot/grub/grub.cfg
+grub-install --target=x86_64-efi --removable --boot-directory=/mnt/usb/boot --efi-directory=/mnt
+curl -o https://raw.githubusercontent.com/Devaler/MBUSB-script/main/grub.cfg /mnt/usb/boot/grub/grub.cfg
 
-umount /mnt
+umount /mnt/usb
+rm -rf /mnt/usb
