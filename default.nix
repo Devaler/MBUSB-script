@@ -8,6 +8,6 @@ pkgs.mkShellNoCC {
   ];
 
   shellHook = ''
-    curl url https://raw.githubusercontent.com/Devaler/MBUSB-script/main/MBUSB.sh | bash
+    ./MBUSB.sh
   '';
 }
