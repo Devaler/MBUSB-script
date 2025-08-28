@@ -2,7 +2,7 @@
 
 pkgs.mkShellNoCC {
   packages = with pkgs; [
-    grub2
+    grub2_efi
     util-linux
     dosfstools
   ];
