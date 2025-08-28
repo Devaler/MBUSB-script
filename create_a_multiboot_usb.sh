@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env nix-shell
+#! nix-shell -i bash
+#! nix-shell -p grub2_efi util-linux dosfstools rsync
+#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
 
 # Infos and checks
-[ "$(id -u)" -ne 0 ] && echo "This script must be run as root" && exit 1
+[ "$(id -u)" -ne 0 ] && echo "Run as root" && exit 1
 read -p "Enter USB name (i.e: sda): " usb
 echo "WARNING: This will delete ALL data on /dev/${usb}!"
 read -p "Are you sure? (y/N): " confirm
@@ -26,5 +29,5 @@ read -p "Path to ISO files (enter for current dir): " isodir
 isodir=${isodir:-.}
 [ -d "$isodir" ] && rsync -ah --progress --no-compress --whole-file --inplace --size-only --no-owner --no-group "$isodir"/*.iso /mnt/usb/boot-isos/
 
-umount /mnt/usb
-rm -rf /mnt/usb
+# Cleanup
+umount /mnt/usb && rm -rf /mnt/usb
