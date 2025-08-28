@@ -1,8 +1,3 @@
-#!/usr/bin/env nix-shell
-#! nix-shell -i bash
-#! nix-shell -p grub2_efi util-linux dosfstools rsync
-#! nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/2a601aafdc5605a5133a2ca506a34a3a73377247.tar.gz
-
 # Infos and checks
 [ "$(id -u)" -ne 0 ] && echo "Run as root" && exit 1
 read -p "Enter USB name (i.e: sda): " usb
