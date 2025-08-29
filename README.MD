@@ -4,7 +4,7 @@
 A USB, bash, grub2_efi and an internet connection.
 
 # How to use :
-`sudo nix-shell https://github.com/devaler/mbusb-script/`  
+`sudo nix-shell https://github.com/Devaler/MBUSB-script/archive/refs/heads/main.zip --run 'find . -name "MBUSB.sh" -exec bash {} \;'`  
 Put the regular ISOs in ${usb}/boot-isos/ . Such ISOs can be Arch, NixOS, etc. containing ${iso}/boot/grub/loopback.cfg . You can check that by mouting the ISOs. This is scripted with a prompt.  
 Put other ISOs in ${usb}/other-isos/ , and will require a manual entry. Such ISOs can be memtest for example.  
 
