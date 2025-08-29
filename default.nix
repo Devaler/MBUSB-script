@@ -9,11 +9,11 @@ pkgs.mkShellNoCC {
 
   shellHook = ''
 # Infos and checks
-[ "$(id -u)" -ne 0 ] && echo "Run as root" && exit 1
+[ "\$(id -u)" -ne 0 ] && echo "Run as root" && exit 1
 read -p "Enter USB name (i.e: sda): " usb
 echo "WARNING: This will delete ALL data on /dev/\${usb}!"
 read -p "Are you sure? (y/N): " confirm
-[ "$confirm" != "y" ] && [ "$confirm" != "Y" ] && echo "Cancelled." && exit 1
+[ "\$confirm" != "y" ] && [ "\$confirm" != "Y" ] && echo "Cancelled." && exit 1
 
 # Format USB
 wipefs -a /dev/\${usb}
@@ -32,7 +32,7 @@ curl https://raw.githubusercontent.com/Devaler/MBUSB-script/main/grub.cfg -o /mn
 # Copy ISOs
 read -p "Path to ISO files (enter for current dir): " isodir
 isodir=\${isodir:-.}
-[ -d "\$isodir" ] && rsync -ah --progress --no-compress --whole-file --inplace --size-only --no-owner --no-group "$isodir"/*.iso /mnt/usb/boot-isos/
+[ -d "\$isodir" ] && rsync -ah --progress --no-compress --whole-file --inplace --size-only --no-owner --no-group "\$isodir"/*.iso /mnt/usb/boot-isos/
 
 # Cleanup
 umount /mnt/usb && rm -rf /mnt/usb
